@@ -92,18 +92,18 @@ Whether to remove the taint that denies pods from being deployed to the Kubernet
 
     kubernetes_pod_network:
       # Flannel CNI.
-      cni: 'flannel'
-      cidr: '10.244.0.0/16'
+      #cni: 'flannel'
+      #cidr: '10.244.0.0/16'
       #
       # Calico CNI.
-      # cni: 'calico'
-      # cidr: '192.168.0.0/16'
+       cni: 'calico'
+       cidr: '192.168.0.0/16'
       #
       # Weave CNI.
       # cni: 'weave'
       # cidr: '192.168.0.0/16'
 
-This role currently supports `flannel` (default), `calico` or `weave` for cluster pod networking. Choose only one for your cluster; converting between them is not done automatically and could result in broken networking; if you need to switch from one to another, it should be done outside of this role.
+This role currently supports `calico` (default), `Flannel` or `weave` for cluster pod networking. Choose only one for your cluster; converting between them is not done automatically and could result in broken networking; if you need to switch from one to another, it should be done outside of this role.
 
     kubernetes_apiserver_advertise_address: ''
     kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
@@ -125,13 +125,6 @@ Apt repository options for Kubernetes installation.
     kubernetes_yum_gpg_check: true
     kubernetes_yum_repo_gpg_check: true
 
-Yum repository options for Kubernetes installation. You can change `kubernete_yum_gpg_key` to a different url if you are behind a firewall or provide a trustworthy mirror. Usually in combination with changing `kubernetes_yum_base_url` as well.
-
-    kubernetes_flannel_manifest_file_rbac: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
-    kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-Flannel manifest files to apply to the Kubernetes cluster to enable networking. You can copy your own files to your server and apply them instead, if you need to customize the Flannel networking configuration.
-
 ## Dependencies
 
 None.
@@ -148,7 +141,7 @@ None.
 
   roles:
     - geerlingguy.docker
-    - geerlingguy.kubernetes
+    - DjaloS.kubernetes
 ```
 
 ### Two or more nodes (single master) cluster
@@ -175,7 +168,7 @@ Playbook:
 
   roles:
     - geerlingguy.docker
-    - geerlingguy.kubernetes
+    - DjaloS.kubernetes
 ```
 
 Then, log into the Kubernetes master, and run `kubectl get nodes` as root, and you should see a list of all the servers.

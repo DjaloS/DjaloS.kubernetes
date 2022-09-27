@@ -1,4 +1,5 @@
 ---
+# les packages à installer 
 kubernetes_packages:
   - name: kubelet
     state: present
@@ -35,6 +36,7 @@ kubernetes_config_kubelet_configuration:
 kubernetes_config_init_configuration:
   localAPIEndpoint:
     advertiseAddress: "{{ kubernetes_apiserver_advertise_address | default(ansible_default_ipv4.address, true) }}"
+    
 # if you use the next lines, remove the command line argument below
 # nodeRegistration:
 #    ignorePreflightErrors:
